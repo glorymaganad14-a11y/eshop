@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gstyle</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div id="app">
+        <nav class="shadow-xl py-5 sticky top-0 w-full bg-white/20 backdrop-blur-lg z-60">
+            <div class="flex justify-center py-3">
+                <h1 class="text-4xl font-black">Gstyle</h1>
+            </div>
+            <div class="flex justify-center gap-10 items-center">
+                <h1 class="cursor-pointer hover:underline hover:scale-105 font-semibold" @click="Homepage">HOME</h1>
+                <h1 class="cursor-pointer hover:underline hover:scale-105 font-semibold" @click="stylePage">STYLES</h1>
+                <h1 class="cursor-pointer hover:underline hover:scale-105 font-semibold" @click="menPage">MEN</h1>
+                <h1 class="cursor-pointer hover:underline hover:scale-105 font-semibold" @click="showWomen">WOMEN</h1>
+                <h1 class="cursor-pointer hover:underline hover:scale-105 font-semibold" @click="aboutPage">ABOUT</h1>
+                <h1 class="cursor-pointer hover:underline hover:scale-105 font-semibold" @click="contactPage">CONTACT
+                </h1>
+                <input class="w-50 h-10 rounded-full border border-gray-200 outline-none p-3 relative pl-8" type="text"
+                    placeholder=" Search"> <i class="fa-solid fa-magnifying-glass absolute right-178 text-gray-400"></i>
+                <div class="space-x-2">
+                    <i
+                        class="fa-solid fa-cart-arrow-down text-xl text-black/80 hover:text-yellow-500 hover:scale-110 cursor-pointer"></i>
+                    <i
+                        class="fa-regular fa-heart text-xl text-black/80 hover:text-red-500 hover:scale-110 cursor-pointer"></i>
+                    <i
+                        class="fa-regular fa-star text-xl text-black/80 hover:text-yellow-500 hover:scale-110 cursor-pointer"></i>
+                    <i
+                        class="fa-solid fa-bag-shopping text-xl text-black/80 hover:text-blue-500 hover:scale-110 cursor-pointer"></i>
+                </div>
+            </div>
+        </nav>
+        <!-- HOMEPAGE -->
+        <div v-if="covers">
+            <div class="w-full h-screen relative">
+                <img :src="cover.image" alt="" class="w-full h-screen">
+                <h1 class="text-9xl text-white absolute top-60 left-130 font-black">G s t y l e</h1>
+                <p class="text-3xl text-white font-bold absolute top-98 left-190">X</p>
+                <h1 class="text-white text-4xl font-semibold absolute left-170 top-110">Jennie Kim</h1>
+                <h1 class="text-8xl text-white font-black absolute bottom-60 left-33">01</h1>
+                <div class="absolute bottom-30 left-10 text-center">
+                    <h1 class="text-3xl text-white font-bold">ALIGN</h1>
+                    <h1 class="text-3xl text-white font-bold">YOUR STYLE WITH</h1>
+                    <h1 class="text-3xl text-white font-bold">YOUR PERSONALITY</h1>
+                </div>
+            </div>
+        </div>
+        <div v-if="homePage">
+            <div v-if="home" class="mt-20 mb-50 flex justify-center h-100 relative gap-10">
+                <h1 class="text-9xl w-300 font-semibold ml-50">WHERE STYLES MEETS QUIET <span>CONFIDENCE</span></h1>
+                <img class="w-200 absolute absolute right-20 mt-0" src="jenniekim-removebg-preview.png" alt="">
+                <div class="absolute left-150 top-110">
+                    <button
+                        class="w-40 h-15 rounded-full bg-black text-white border border-5 font-semibold text-lg hover:scale-105 cursor-pointer">SHOP
+                        NOW</button>
+                </div>
+            </div>
+            <div v-if="home">
+                <div class="flex justify-center">
+                    <hr class="w-310">
+                </div>
+                <div class="flex justify-center mt-5">
+                    <i class="fa-solid fa-ellipsis text-7xl"></i>
+                </div>
+
+                <div class="flex justify-center m-5 relative">
+                    <img class="rounded-lg w-310"
+                        src="https://i.pinimg.com/1200x/a4/e8/7f/a4e87f77a37610077e81af5287f95163.jpg" alt="">
+                    <div>
+                        <h1 class="text-5xl text-white font-black absolute bottom-5 right-115 shadow-lg">OWN THE STYLE
+                            HERE
+                            IN
+                            Gstyle</h1>
+                    </div>
+                </div>
+            </div>
+            <div v-if="featuring" class="mt-20 mx-20">
+                <h1 class="text-3xl font-bold ml-35 mb-20"><span class="text-4xl font-black">|</span>FEATURES</h1>
+                <div class="flex justify-center">
+                    <div class="flex grid grid-cols-4 gap-25">
+                        <div v-for="feature in features">
+                            <div class="w-60 h-60">
+                                <img :src="feature.image" alt="" class="w-60 h-60">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- WOMEN -->
+        <div v-if="women">
+            <h1 class="text-3xl font-bold ml-55 mt-20">WOMEN TOPS</h1>
+            <div class="flex justify-center h-screen items-center mt-20">
+                <div class="flex grid grid-cols-4 gap-10">
+                    <div v-for="item in items" class="w-70 h-100 rounded-lg cursor-pointer shadow-lg hover:-translate-y-1 duration-300">
+                        <div class="flex justify-center">
+                            <img :src="item.image" alt="" class="w-70 h-70 rounded">
+                        </div>
+                        <div class="p-2">
+                            <div class="flex items-center justify-between pr-5">
+                                <h1 class="font-semibold text-xl">{{item.name}}</h1>
+                                <i class="fa-regular fa-star text-xl"></i>
+                            </div>
+                            <i class="fa-solid fa-star text-sm text-yellow-500"></i>
+                            <i class="fa-solid fa-star text-sm text-yellow-500"></i>
+                            <i class="fa-solid fa-star text-sm text-yellow-500"></i>
+                            <i class="fa-solid fa-star text-sm text-yellow-500"></i>
+                            <i class="fa-solid fa-star text-sm text-yellow-500"></i>
+                            <h3 class="text-base text-gray-500">{{item.sold}}</h3>
+                            <p class="font-bold text-blue-600">{{item.price}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STYLES -->
+        <div v-if="showStyles" class="w-full bg-white">
+            <div class="m-10 text-center">
+                <h1 class="text-9xl font-black">BE </h1>
+                <h1 class="text-9xl font-black">LIMITLESS</h1>
+                <h1 class="text-9xl font-black">OWN THE STYLE</h1>
+            </div>
+            <div class="flex justify-center">
+                <hr class="w-260">
+            </div>
+            <div class="flex justify-center mt-20">
+                <h1 class="font-bold text-3xl">TRY DIFFERENT STYLES</h1>
+            </div>
+            <h1 class="text-2xl text-center">and be confident</h1>
+            <div class="flex justify-center mt-10 p-10 grid grid-cols-4 gap-8">
+                <div v-for="style in styles">
+                    <div class="cursor-pointer hover:-translate-y-1 duration-300 flex justify-center">
+                        <div>
+                            <img :src="style.image" alt="" class="w-80 h-100 rounded-xl">
+                            <div
+                                class="flex justify-center border mt-5 w-50 mb-10 ml-15 rounded-full bg-black hover:bg-black/80">
+                                <h1 class=" text-xl text-white font-semibold">{{style.name}}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEN -->
+        <div v-if="mensWear" class="w-full bg-white">
+            <div>
+
+            </div>
+            <div class="mt-20">
+                <h1 class="text-3xl font-bold ml-55 gap-10">MEN'S WEAR</h1>
+                <div class="flex justify-center items-center">
+                    <div class="flex grid grid-cols-4 mt-10 gap-10">
+                        <div v-for="Mens in Men">
+                            <div class="w-70 h-105 shadow-lg rounded-lg hover:-translate-y-1 duration-300 cursor-pointer relative">
+                                <img :src="Mens.image" alt="menswear" class="w-70 h-70">
+                                <div class="p-2 z-5 absolute bg-white/40 hover:h-70 duration-300 backdrop-blur-lg w-full bottom-0 h-30">
+                                    <div class="flex justify-between items-center">
+                                        <h1 class="font-semibold text-xl">{{Mens.name}}</h1>
+                                        <i class="fa-regular fa-star text-xl"></i>
+                                    </div>
+                                    <i class="fa-solid fa-star text-sm text-yellow-500"></i>
+                                    <i class="fa-solid fa-star text-sm text-yellow-500"></i>
+                                    <i class="fa-solid fa-star text-sm text-yellow-500"></i>
+                                    <i class="fa-solid fa-star text-sm text-yellow-500"></i>
+                                    <i class="fa-solid fa-star text-sm text-yellow-500"></i>
+                                    <h3 class="text-base text-gray-500">{{Mens.sold}}</h3>
+                                    <p class="font-bold text-blue-600">{{Mens.price}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ABOUT -->
+        <div v-if="aboutUs" class="w-full bg-white mt-20">
+            <div class="flex justify-center">
+                <div class="w-300 h-100 rounded-lg border relative">
+                    <img src="bgforeshop.jpg" alt="" class="w-300 h-100">
+                    <h1 class="text-9xl font-black absolute top-30 left-20 text-white shadow-xl/30">ABOUT US</h1>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <h1 class="text-3xl font-bold m-10">WELCOME TO GStyle, WHERE STYLES MEETS QUIET CONFIDENCE.</h1>
+            </div>
+            <div class="flex justify-center">
+                <div class="w-300 h-50 border">
+                    <p class="text-xl font-semibold p-10">At GStyle, we believe clothing is more than just fabric – it’s
+                        a statement. Established with the
+                        mission to create trendy, high-quality apparel that empowers individuals to express themselves,
+                        GStyle transforms everyday wear into a canvas of self-expression. Whether you’re dressing for
+                        confidence, comfort, or style, our collections are designed to keep you at the forefront of
+                        fashion
+                        while staying true to your unique identity.</p>
+                </div>
+            </div>
+            <div class="flex p-10 gap-5 justify-center">
+                <div class="w-150 h-50 border bg-black rounded-xl">
+                    <h1 class="text-3xl font-bold text-center text-white m-5">OUR MISSION</h1>
+                    <p class="text-xl font-semibold text-white px-10">To inspire and define modern streetwear culture in
+                        the Philippines and beyond, creating clothing
+                        that resonates with creativity, boldness, and authenticity.</p>
+                </div>
+                <div class="w-150 h-50 border bg-black rounded-xl">
+                    <h1 class="text-3xl font-bold text-center text-white m-5">OUR VISION</h1>
+                    <p class="text-xl font-semibold text-white px-10 pb-5">Curate versatile and stylish pieces that
+                        blend comfort, quality, and trend-awareness.
+                        Foster a community of fashion-forward individuals who value self-expression through style.</p>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <button
+                    class="w-55 h-15 bg-black text-xl text-white font-semibold text-center rounded-full hover:scale-105 cursor-pointer mb-10">Learn
+                    More</button>
+            </div>
+        </div>
+        <!-- CONTACT -->
+        <div v-if="contact" class="w-full bg-white mt-10">
+            <div class="flex justify-center m-10">
+                <h1 class="text-3xl font-bold">CONTACT US</h1>
+            </div>
+            <div class="flex justify-center">
+                <div class="w-338 h-40 border rounded-lg relative">
+                    <img src="contact.jpg" alt="" class="w-338 h-40 rounded-lg">
+                    <h1 class="text-5xl font-bold text-white absolute top-15 left-20">WHERE YOU CAN REACH US...</h1>
+                </div>
+            </div>
+            <div class="flex justify-center p-5">
+                <textarea name="T" id="" class="w-338 h-20 border p-5 text-xl outline-none rounded-lg"
+                    placeholder="Type your message here"></textarea>
+            </div>
+            <div class="flex justify-center gap-5 mt-5">
+                <input type="text" placeholder="Full Name" class="w-100 h-12 rounded-full border p-5 outline-none">
+                <input type="email" placeholder="Email address" class="w-100 h-12 rounded-full border p-5 outline-none">
+                <input type="number" placeholder="Contact number"
+                    class="w-100 h-12 rounded-full border p-5 outline-none">
+                <button
+                    class="w-20 h-12 bg-black text-white font-semibold text-xl rounded-full hover:scale-105 cursor-pointer">Send</button>
+            </div>
+            <h1 class="text-3xl font-bold p-10 pl-40"><span class="text-black font-black text-4xl">|</span>OUR SOCIAL
+                PLATFORMS</h1>
+
+            <div class="flex pl-40 gap-10">
+                <div class="flex items-center gap-2 cursor-pointer hover:scale-105 hover:underline">
+                    <i class="fa-solid fa-envelope text-xl font-semibold"></i>
+                    <p class="text-xl font-semibold">gstyle@gmil.com</p>
+                </div>
+                <div class="flex items-center gap-2 cursor-pointer hover:scale-105 hover:underline">
+                    <i class="fa-brands fa-instagram text-2xl font-semibold text-red-500"></i>
+                    <p class="text-xl font-semibold">gsytlefasion</p>
+                </div>
+                <div class="flex items-center gap-2 cursor-pointer hover:scale-105 hover:underline">
+                    <i class="fa-brands fa-x-twitter text-2xl"></i>
+                    <p class="text-xl font-semibold">gsytlefasion</p>
+                </div>
+                <div class="flex items-center gap-2 cursor-pointer hover:scale-105 hover:underline">
+                    <i class="fa-brands fa-facebook text-2xl font-semibold text-blue-500"></i>
+                    <p class="text-xl font-semibold">Gstyle Official</p>
+                </div>
+                <div class="flex items-center gap-2 cursor-pointer hover:scale-105 hover:underline">
+                    <i class="fa-solid fa-phone text-2xl font-semibold text-green-500"></i>
+                    <p class="text-xl font-semibold">+1123756835</p>
+                </div>
+            </div>
+        </div>
+        <footer class="mt-20 w-full z-1">
+            <div class="flex items-end">
+
+                <div class="w-full h-80 bg-black rounded-t-xl p-5">
+                    <h1 class="text-white text-4xl font-black text-center mb-10">Gstyle</h1>
+                    <div class="flex justify-around">
+                        <div>
+                            <h1 class="text-xl font-bold text-white">Gstyle LOCATIONS</h1>
+                            <P class="text-white/80 text-base">Philippines</P>
+                            <p class="text-white/80 text-base">South Korea</p>
+                            <p class="text-white/80 text-base">France</p>
+                            <p class="text-white/80 text-base">USA</p>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-white">Gstyle BRANCHES</h1>
+                            <p class="text-white/80 text-base">New York</p>
+                            <P class="text-white/80 text-base">Manila</P>
+                            <p class="text-white/80 text-base">Seoul</p>
+                            <p class="text-white/80 text-base">Paris</p>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-white">Gstyle SERVICES</h1>
+                            <P class="text-white/80 text-base">Style Consulation</P>
+                            <p class="text-white/80 text-base">Customization</p>
+                            <p class="text-white/80 text-base">Friendtex</p>
+                            <p class="text-white/80 text-base">Sewport</p>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-white">Gstyle ONLINE SERVICES</h1>
+                            <p class="text-white/80 text-base">Care and Services</p>
+                            <p class="text-white/80 text-base">Shipping Options</p>
+                            <P class="text-white/80 text-base">Payment methods</P>
+                            <p class="text-white/80 text-base">Sewport</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <hr class="text-white mt-10 w-355">
+                    </div>
+                    <div class="flex items-center gap-2 ml-27 mt-2">
+                        <i class="fa-regular fa-copyright text-white"></i>
+                        <p class="text-white">2026Gstyle. All Rights Reserved</p>
+                    </div>
+                </div>
+        </footer>
+    </div>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    women: false,
+                    home: true,
+                    contact: false,
+                    showStyles: false,
+                    homePage: true,
+                    mensWear: false,
+                    aboutUs: false,
+                    covers: true,
+                    featuring: true,
+
+                    cover: {
+                        image: 'coverj.jpg',
+                    },
+
+                    features: [
+                        {
+                            image: 'https://i.pinimg.com/736x/5b/6c/c4/5b6cc4708b775960160d7a7a4b770d27.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/ae/df/e2/aedfe223696487398bdda323fe921214.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/3f/be/b2/3fbeb29905ae6d1fbcc410a214251090.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/42/d8/48/42d848aff3abee881b2853b0a3133e46.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/27/4a/bd/274abd5810616deb99b22ef515981e4e.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/63/e7/5f/63e75f37772a364f8e2ef3ee82d092ba.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/32/1a/d8/321ad8d5b325754e82466806e7be82ac.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/d8/09/e6/d809e681711487d38fc65deb3fc9b5a9.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/ad/dd/0f/addd0f3b111131e289a21417926b67b2.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/94/a3/a0/94a3a067f3f28f3a74354d52bf1ca79b.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/10/00/e5/1000e55370a129b6bfc6b2206d8de4be.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/f7/81/9a/f7819a87d1f62c165a77c1c781afe34e.jpg',
+                        },
+
+
+                        {
+                            image: 'https://i.pinimg.com/736x/69/be/81/69be81db9982be6b0ba911dd28c8fecc.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/b6/4b/92/b64b9203c5f6f4f01440ebcec5e64d07.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/7a/b5/2e/7ab52ea3086637b96204bde8535515d2.jpg',
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/97/82/b1/9782b1b11c767170895e671b431eb13d.jpg',
+                        },
+                    ],
+                    items: [
+                        {
+                            image: 'https://i.pinimg.com/1200x/a9/c4/d1/a9c4d1c278896b145b4ee5f351e5fbb7.jpg',
+                            name: 'Classy red top',
+                            sold: '100k+ sold',
+                            price: '$90'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/32/af/5c/32af5ce784f4446c8bd8ec7237111ac5.jpg',
+                            name: 'light blue top',
+                            sold: '92k+ sold',
+                            price: '$80'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/d5/d5/d3/d5d5d3a2a840fbb1f6410e99c258f658.jpg',
+                            name: 'Kinsley silky top',
+                            sold: '70k+ sold',
+                            price: '$109.99'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/6c/f5/b7/6cf5b72a6a29e1e9ecbe8fa7c6e81544.jpg',
+                            name: 'Ash cotton top',
+                            sold: '80k+ sold',
+                            price: '$123'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/db/2a/92/db2a9244759b901130fd062d4ebeccf5.jpg',
+                            name: 'Elegant Ophelia top',
+                            sold: '1k+ sold',
+                            price: '$500'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/85/fe/92/85fe92293bf3c494daff5ae94a7320aa.jpg',
+                            name: 'Emma Rose Design',
+                            sold: '200k+ sold',
+                            price: '$500'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/2a/00/18/2a0018260ff30c26a22b77813e29699a.jpg',
+                            name: 'Light blue summer top',
+                            sold: '200k+ sold',
+                            price: '$500'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/99/12/f5/9912f581fe04aaf201e91a6216dd7e1c.jpg',
+                            name: 'French Socialite',
+                            sold: '90k+ sold',
+                            price: '$381.99'
+                        },
+                    ],
+                    styles: [
+                        {
+                            image: 'https://i.pinimg.com/1200x/4f/58/b3/4f58b359263c97ae1526fc5203bbf16b.jpg',
+                            name: 'Street Style'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/36/51/55/3651557b46d7ed0a145a4d25e67b344a.jpg',
+                            name: 'Old Money Style'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/6f/77/aa/6f77aa496a80d4e250a435f429de6a21.jpg',
+                            name: 'Coquette Style'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/2d/53/dc/2d53dc4ba7dc2ae80b547b0023d2723e.jpg',
+                            name: 'Formal Style'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/86/98/75/86987508a28d55f35e6f7d1f70ed9c80.jpg',
+                            name: 'Basic Outfit'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/6d/68/34/6d68346b96b2e879d450d3314cf62285.jpg',
+                            name: 'Summer Outfit'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/d3/6e/fd/d36efd4746122d61f08c2ec88266afb7.jpg',
+                            name: 'Goth Style'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/e1/0b/7c/e10b7c75a94f22dd43acb9fb3fd2481e.jpg',
+                            name: 'Y2K Style'
+                        }
+                    ],
+                    Men: [
+                        {
+                            image: 'https://i.pinimg.com/736x/e8/87/47/e8874763b6f22de810747e0522b457d7.jpg',
+                            name: 'Vintage T-shirt',
+                            sold: '92k+ sold',
+                            price: '$93'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/a3/58/0b/a3580b3cfd502364bcfa1f8e25bc508a.jpg',
+                            name: 'Y2K T-shirt',
+                            sold: '40k+ sold',
+                            price: '$105'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/b5/c1/ca/b5c1ca26ee68cccff3955f04ca043542.jpg',
+                            name: 'Sadsmile Jersey Black',
+                            sold: '100k+ sold',
+                            price: '$189'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/2f/1b/13/2f1b138e5bb327519ce265883918b46d.jpg',
+                            name: 'Miu Miu Polo Shirt',
+                            sold: '150k+ sold',
+                            price: '$209'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/bc/85/45/bc8545afc7abe0ab2fd261f34575446d.jpg',
+                            name: 'Okaido Polo Shirt',
+                            sold: '80k+ sold',
+                            price: '$89'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/1200x/75/b0/69/75b0690b4e9673fd2d6c20227604efba.jpg',
+                            name: 'Aelfric Vintage T-shirt',
+                            sold: '50k+ sold',
+                            price: '$90'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/7e/4e/1b/7e4e1b79bc86dc6c3be86e2b1df1af4c.jpg',
+                            name: 'Black Trendy T-shirt',
+                            sold: '110k+ sold',
+                            price: '$189'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/cc/c2/95/ccc295897eccd4334af6103b5f1ada67.jpg',
+                            name: 'Metallica T-shirt',
+                            sold: '40k+ sold',
+                            price: '$58'
+                        },
+                    ]
+
+                }
+            }, methods: {
+                showWomen() {
+                    this.showStyles = false;
+                    this.home = false;
+                    this.men = false;
+                    this.women = true;
+                    this.mensWear = false;
+                    this.aboutUs = false;
+                    this.contact = false;
+                    this.covers = false;
+                    this.featuring = false;
+                },
+
+                stylePage() {
+                    this.showStyles = true;
+                    this.home = false;
+                    this.men = false;
+                    this.women = false;
+                    this.mensWear = false;
+                    this.aboutUs = false;
+                    this.contact = false;
+                    this.covers = false;
+                    this.featuring = false;
+                },
+                Homepage() {
+                    this.showStyles = false;
+                    this.home = true;
+                    this.men = false;
+                    this.women = false;
+                    this.homePage = true;
+                    this.mensWear = false;
+                    this.aboutUs = false;
+                    this.contact = false;
+                    this.covers = true;
+                    this.featuring = true;
+                },
+                menPage() {
+                    this.showStyles = false;
+                    this.home = false;
+                    this.men = false;
+                    this.women = false;
+                    this.homePage = false;
+                    this.mensWear = true;
+                    this.aboutUs = false;
+                    this.contact = false;
+                    this.covers = false;
+                    this.featuring = false;
+                },
+                aboutPage() {
+                    this.showStyles = false;
+                    this.home = false;
+                    this.men = false;
+                    this.women = false;
+                    this.homePage = false;
+                    this.mensWear = false;
+                    this.aboutUs = true;
+                    this.contact = false;
+                    this.covers = false;
+                    this.featuring = false;
+                },
+                contactPage() {
+                    this.showStyles = false;
+                    this.home = false;
+                    this.men = false;
+                    this.women = false;
+                    this.homePage = false;
+                    this.mensWear = false;
+                    this.aboutUs = false;
+                    this.contact = true;
+                    this.covers = false;
+                    this.featuring = false;
+                },
+
+            },
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
